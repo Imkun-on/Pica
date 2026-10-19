@@ -51,7 +51,7 @@ log = setup_logger('audiodex', 'audiodex.log')
 # e dentro OneDrive o dentro Program Files si sincronizzerebbe o non si
 # potrebbe scrivere. E' anche corto di proposito: i file di PyTorch hanno
 # percorsi lunghi, e Windows si ferma a 260 caratteri.
-_BASE = os.path.join(os.environ.get('LOCALAPPDATA') or paths.dati(), 'MediaDex')
+_BASE = paths.locale()
 AMBIENTE = os.path.join(_BASE, 'voce')
 _MODELLI = os.path.join(_BASE, 'voce-modelli')
 _CACHE = os.path.join(_BASE, 'voce-cache')
@@ -187,7 +187,7 @@ def prepara_ambiente(avanza=None) -> None:
         return
     if getattr(sys, 'frozen', False):
         raise RuntimeError('La voce ha bisogno di Python installato sul computer: '
-                           'avvia MediaDex dai sorgenti per usarla la prima volta.')
+                           'avvia Pica dai sorgenti per usarla la prima volta.')
     if avanza:
         avanza('preparo la voce (la prima volta, circa un giga)')
     os.makedirs(_BASE, exist_ok=True)
@@ -291,7 +291,7 @@ def doppia(video: str, riscritture: dict[int, str], avanza=None) -> str:
 
     prepara_ambiente(lambda t: dici(t))
     os.makedirs(_CACHE, exist_ok=True)
-    with tempfile.TemporaryDirectory(prefix='mediadex_voce_') as tmp:
+    with tempfile.TemporaryDirectory(prefix='pica_voce_') as tmp:
         persone = {elenco[i].persona for i in cambiate}
         esempi = _esempi(video, elenco, persone, tmp)
         impronte = {p: _impronta_file(f) for p, f in esempi.items()}
@@ -425,6 +425,6 @@ def _imprimi_con_audio(video: str, ass: str, audio: str, uscita: str) -> None:
          '-i', os.path.abspath(audio), '-vf', filtri, '-map', '0:v:0', '-map', '1:a:0',
          '-c:v', 'libx264', '-crf', '20', '-preset', 'veryfast', '-pix_fmt', 'yuv420p',
          '-c:a', 'aac', '-b:a', '192k', '-sn', '-movflags', '+faststart',
-         '-metadata', 'comment=Voci generate con MediaDex (Chatterbox): non sono le voci originali',
+         '-metadata', 'comment=Voci generate con Pica (Chatterbox): non sono le voci originali',
          os.path.abspath(uscita)],
         cwd=cartella, check=True, capture_output=True)

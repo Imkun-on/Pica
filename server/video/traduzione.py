@@ -73,7 +73,7 @@ def _cartella(da: str, a: str, radice: str) -> str:
     log.info('Scarico il modello di traduzione: %s', url)
     r = requests.get(url, timeout=600)
     r.raise_for_status()
-    with tempfile.TemporaryDirectory(prefix='mediadex_opus_') as tmp:
+    with tempfile.TemporaryDirectory(prefix='pica_opus_') as tmp:
         originale = os.path.join(tmp, 'marian')
         with zipfile.ZipFile(io.BytesIO(r.content)) as z:
             z.extractall(originale)

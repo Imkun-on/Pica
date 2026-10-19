@@ -83,7 +83,7 @@ TESTI: dict[str, str] = {
     'opz.normalizza':   'Normalizza volume',
     'opz.destinazione': 'Destinazione',
     'opz.salva':        'Salva in',
-    'opz.salva.solita': 'Cartella di MediaFlow',
+    'opz.salva.solita': 'Cartella di Pica',
     'opz.cartella_playlist': 'Crea cartella per playlist',
     'opz.scelto':       'File selezionato',
     'opz.scelto.vuoto': 'Clicca una traccia della libreria per vederne i dettagli.',

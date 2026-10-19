@@ -29,7 +29,7 @@ const LIB = {
   linguetta: 'tutti',
   cerca: '',
   soloFatti: false,
-  cartella: '',         // vuota: la cartella di MediaFlow
+  cartella: '',         // vuota: la cartella di Pica
   libero: 0,
   prossima: 1,
 };

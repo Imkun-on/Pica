@@ -1,7 +1,7 @@
-"""Nessuna finestra nera per i programmi che MediaFlow lancia da se'.
+"""Nessuna finestra nera per i programmi che Pica lancia da se'.
 
 Il guasto
-    MediaFlow e' un programma a finestra, senza console (``console=False``
+    Pica e' un programma a finestra, senza console (``console=False``
     nel .spec). Su Windows, quando un programma senza console lancia un
     programma da console - ffmpeg, ffprobe, il Python del doppiaggio, pip -
     Windows gliene apre una nuova. Un download ne lancia parecchi: ffprobe per

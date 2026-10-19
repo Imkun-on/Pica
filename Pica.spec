@@ -1,7 +1,7 @@
-# Istruzioni per costruire MediaDex con PyInstaller.
+# Istruzioni per costruire Pica con PyInstaller.
 #
 #     .\costruisci.ps1                 (e' lui che chiama questo file)
-#     python -m PyInstaller MediaDex.spec --noconfirm
+#     python -m PyInstaller Pica.spec --noconfirm
 #
 # A cartella, non a file unico
 #     E' cambiato con l'installatore, e cambia due cose in meglio.
@@ -13,7 +13,7 @@
 #     importare Rich e il ponte con WebView2.
 #
 #     E l'aggiornamento diventa pulito. L'installatore spazza {app}\_internal
-#     prima di ricopiare (vedi [InstallDelete] in installer/MediaDex.iss):
+#     prima di ricopiare (vedi [InstallDelete] in installer/Pica.iss):
 #     senza, le librerie di due versioni diverse si accumulerebbero nella
 #     stessa cartella e Python ne caricherebbe un misto.
 #
@@ -81,7 +81,7 @@ dati = [
 ]
 # L'icona della finestra: la stessa dell'eseguibile, ma pywebview la vuole
 # come file, non incorporata nelle risorse del .exe.
-for _risorsa in ('MediaDex.ico', 'MediaDex.png'):
+for _risorsa in ('Pica.ico', 'Pica.png'):
     if os.path.exists(os.path.join('assets', _risorsa)):
         dati.append((os.path.join('assets', _risorsa), 'assets'))
 dati += collect_data_files('yt_dlp')
@@ -149,7 +149,7 @@ pyz = PYZ(a.pure)
 # prima ancora che esista un interprete Python: lo stato finale e' lo stesso,
 # cambia solo quando viene raggiunto.
 #
-# <longPathAware> serve a MediaDex piu' che ad altri: i nomi delle cartelle
+# <longPathAware> serve a Pica piu' che ad altri: i nomi delle cartelle
 # vengono dai titoli delle playlist di YouTube, e fra artista, album e nome
 # della traccia i 260 caratteri si superano senza sforzo.
 MANIFEST = """<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
@@ -191,7 +191,7 @@ exe = EXE(
     # A cartella: i binari e i dati non entrano nell'eseguibile, li raccoglie
     # COLLECT qui sotto dentro _internal/.
     exclude_binaries=True,
-    name='MediaDex',
+    name='Pica',
     debug=False,
     bootloader_ignore_signals=False,
     strip=False,
@@ -208,7 +208,7 @@ exe = EXE(
     # Il marchio: la gazza col CD nel becco, generata da assets/marchio.py.
     # Senza questa riga Windows mostra l'icona di ripiego di
     # PyInstaller, che non c'entra niente con il programma.
-    icon=os.path.join('assets', 'MediaDex.ico'),
+    icon=os.path.join('assets', 'Pica.ico'),
 )
 
 coll = COLLECT(
@@ -218,5 +218,5 @@ coll = COLLECT(
     strip=False,
     upx=False,
     upx_exclude=[],
-    name='MediaDex',
+    name='Pica',
 )

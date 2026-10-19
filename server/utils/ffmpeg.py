@@ -20,7 +20,7 @@ Da dove viene, se manca
     altri lo si scarica al primo avvio, in sottofondo, come si fa con Tor
     (vedi ``utils/tor.py``): la build «full shared» di gyan.dev, la stessa
     famiglia che installa ``winget install Gyan.FFmpeg``, circa 100 MB, in
-    ``%LOCALAPPDATA%\\MediaDex\\ffmpeg``. La cartella viene poi messa in testa
+    ``%LOCALAPPDATA%\\Pica\\ffmpeg``. La cartella viene poi messa in testa
     al PATH di questo processo: tutti i motori chiamano ``ffmpeg`` per nome,
     e continuano a farlo senza sapere da dove arriva.
 
@@ -43,8 +43,7 @@ from server.utils.console import console, setup_logger
 
 log = setup_logger('ffmpeg', 'ffmpeg.log')
 
-CARTELLA = os.path.join(os.environ.get('LOCALAPPDATA') or paths.dati(),
-                        'MediaDex', 'ffmpeg')
+CARTELLA = paths.locale('ffmpeg')
 _NOMI = ('ffmpeg', 'ffprobe')
 # L'ultima versione la dice GitHub, dove gyan.dev pubblica le sue build. Se
 # GitHub non risponde resta l'indirizzo fisso di gyan.dev, che ha solo la

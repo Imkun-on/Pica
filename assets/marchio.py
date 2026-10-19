@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""Il marchio di MediaFlow, montato una volta sola e messo nei posti in cui serve.
+"""Il marchio di Pica, montato una volta sola e messo nei posti in cui serve.
 
     python assets/marchio.py
 
@@ -14,12 +14,12 @@ Cosa gli si fa
     filo scuro, che lo stacca tanto da un desktop chiaro quanto da uno scuro.
 
 Dove finisce
-    - ``assets/MediaDex.ico``: l'eseguibile, la finestra e l'installatore su
+    - ``assets/Pica.ico``: l'eseguibile, la finestra e l'installatore su
       Windows.
-    - ``assets/MediaDex.icns``: l'applicazione su macOS. Li' le icone non
+    - ``assets/Pica.icns``: l'applicazione su macOS. Li' le icone non
       toccano i bordi della tela: il disegno occupa l'ottanta per cento e il
       resto e' margine vuoto, come vuole il sistema.
-    - ``assets/MediaDex.png``: Linux, e l'icona della pagina.
+    - ``assets/Pica.png``: Linux, e l'icona della pagina.
     - ``client/marchio.png``: la barra laterale e il velo di avvio. Qui non
       c'e' il quadrato: solo la gazza, scontornata, sul nero della finestra.
 
@@ -42,9 +42,9 @@ from PIL import Image, ImageDraw
 QUI = os.path.dirname(os.path.abspath(__file__))
 RADICE = os.path.dirname(QUI)
 ORIGINALE = os.path.join(QUI, 'icona-originale.png')
-ICO = os.path.join(QUI, 'MediaDex.ico')
-ICNS = os.path.join(QUI, 'MediaDex.icns')
-PNG = os.path.join(QUI, 'MediaDex.png')
+ICO = os.path.join(QUI, 'Pica.ico')
+ICNS = os.path.join(QUI, 'Pica.icns')
+PNG = os.path.join(QUI, 'Pica.png')
 PAGINA = os.path.join(RADICE, 'client', 'marchio.png')
 
 # Tutto e' pensato su 1024 punti di lato, la misura piu' grande che un sistema

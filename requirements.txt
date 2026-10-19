@@ -1,4 +1,4 @@
-# MediaDex - dipendenze Python
+# Pica - dipendenze Python
 #
 # NB: serve anche FFmpeg nel PATH (non installabile via pip):
 #   winget install Gyan.FFmpeg

@@ -1,5 +1,5 @@
 <#
-    Costruisce MediaFlow-Setup.exe, dall'inizio alla fine.
+    Costruisce Pica-Setup.exe, dall'inizio alla fine.
 
         .\costruisci.ps1
         .\costruisci.ps1 -Versione 1.2.0
@@ -38,9 +38,9 @@ $ErrorActionPreference = 'Stop'
 Set-StrictMode -Version Latest
 
 $Radice = $PSScriptRoot
-$Dist   = Join-Path $Radice 'dist\MediaDex'
-$Spec   = Join-Path $Radice 'MediaDex.spec'
-$Iss    = Join-Path $Radice 'installer\MediaDex.iss'
+$Dist   = Join-Path $Radice 'dist\Pica'
+$Spec   = Join-Path $Radice 'Pica.spec'
+$Iss    = Join-Path $Radice 'installer\Pica.iss'
 $Uscita = Join-Path $Radice 'installer\output'
 
 function Titolo($t)  { Write-Host "`n$t" -ForegroundColor Cyan }
@@ -54,7 +54,7 @@ Titolo 'Passo 0/4  Controlli'
 if (-not (Test-Path $Spec)) { throw "Manca $Spec" }
 if (-not (Test-Path $Iss))  { throw "Manca $Iss" }
 
-# FFmpeg non viene impacchettato (vedi il commento in MediaDex.spec), quindi la
+# FFmpeg non viene impacchettato (vedi il commento in Pica.spec), quindi la
 # sua assenza qui non impedisce di costruire niente: si avvisa e si tira
 # dritto. Serve pero' a chi costruisce, per provare il risultato.
 if ($null -eq (Get-Command ffmpeg -ErrorAction SilentlyContinue)) {
@@ -112,7 +112,7 @@ else {
         --workpath (Join-Path $Radice 'build')
     if ($LASTEXITCODE -ne 0) { throw 'PyInstaller ha fallito.' }
 
-    $esebuilt = Join-Path $Dist 'MediaDex.exe'
+    $esebuilt = Join-Path $Dist 'Pica.exe'
     if (-not (Test-Path $esebuilt)) { throw "PyInstaller e'' andato a buon fine ma $esebuilt non c''e''." }
 }
 
@@ -120,7 +120,7 @@ else {
 
 Titolo 'Passo 2/4  Pulizia di dist\'
 
-# MediaDex scrive accanto a se stesso. Chi costruisce, di solito, ha appena
+# Pica scrive accanto a se stesso. Chi costruisce, di solito, ha appena
 # provato l'eseguibile dalla cartella dist\: e li' dentro sono rimasti i suoi
 # brani scaricati, i suoi log, il suo database. Inno li spedirebbe dentro
 # l'installatore senza chiedere niente a nessuno.
@@ -161,7 +161,7 @@ if ($LASTEXITCODE -ne 0) { throw 'Inno Setup ha fallito.' }
 
 Titolo 'Passo 4/4  Fatto'
 
-$Prodotto = Join-Path $Uscita 'MediaFlow-Setup.exe'
+$Prodotto = Join-Path $Uscita 'Pica-Setup.exe'
 if (-not (Test-Path $Prodotto)) { throw "Inno Setup e'' andato a buon fine ma $Prodotto non c''e''." }
 
 $mb     = [math]::Round((Get-Item $Prodotto).Length / 1MB, 1)

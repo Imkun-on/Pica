@@ -79,6 +79,35 @@ def risorsa(*parti: str) -> str:
     return os.path.join(cartella_risorse(), *parti)
 
 
+# ── Gli strumenti scaricati, fuori dalla cartella del programma ──────────────
+#
+# FFmpeg, Tor, Real-ESRGAN e l'ambiente della voce stanno in
+# %LOCALAPPDATA%\Pica. Fino a quando il programma si chiamava MediaDex la
+# cartella era %LOCALAPPDATA%\MediaDex: la si rinomina una volta sola, cosi'
+# nessuno riscarica un giga e mezzo solo perche' e' cambiato il nome. Se il
+# rinomino non riesce (un tor.exe ancora aperto, per dire) si continua a usare
+# la vecchia: meglio un nome vecchio che un download inutile.
+
+_VECCHIO_NOME = 'MediaDex'
+
+
+def _cartella_locale() -> str:
+    base = os.environ.get('LOCALAPPDATA') or cartella_dati()
+    nuova = os.path.join(base, 'Pica')
+    vecchia = os.path.join(base, _VECCHIO_NOME)
+    if os.path.isdir(vecchia) and not os.path.exists(nuova):
+        try:
+            os.rename(vecchia, nuova)
+        except OSError:
+            return vecchia
+    return nuova
+
+
+def locale(*parti: str) -> str:
+    """Percorso dentro %LOCALAPPDATA%\\Pica, dove stanno gli strumenti scaricati."""
+    return os.path.join(_cartella_locale(), *parti)
+
+
 # ── Dove finisce quello che il programma produce ─────────────────────────────
 #
 # Una cartella sola, divisa come la finestra: una sottocartella per ogni

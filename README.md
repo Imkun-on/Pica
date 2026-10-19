@@ -1,8 +1,8 @@
 <p align="center">
-  <img src="assets/MediaDex.png" alt="MediaFlow: una gazza ladra in volo con un CD nel becco" width="170">
+  <img src="assets/Pica.png" alt="Pica: una gazza ladra in volo con un CD nel becco" width="170">
 </p>
 
-<h1 align="center">MediaFlow</h1>
+<h1 align="center">Pica</h1>
 
 <p align="center">
   <b>Tutto l'audio e il video, in un solo spazio.</b><br>
@@ -22,7 +22,7 @@
 <p align="center">
   <a href="#uno-sguardo-allapp">Uno sguardo</a> ·
   <a href="#a-cosa-serve">A cosa serve</a> ·
-  <a href="#perché-mediaflow">Perché</a> ·
+  <a href="#perché-pica">Perché</a> ·
   <a href="#avvio-rapido">Avvio rapido</a> ·
   <a href="#download">Download</a> ·
   <a href="#licenza-e-crediti">Licenza</a>
@@ -31,7 +31,7 @@
 <br>
 
 > [!NOTE]
-> MediaFlow oggi gira su **Windows**. I pacchetti per macOS e Linux sono in lavorazione:
+> Pica oggi gira su **Windows**. I pacchetti per macOS e Linux sono in lavorazione:
 > l'interfaccia è già la stessa su tutti e tre i sistemi, manca la parte che scarica
 > FFmpeg e Tor per ciascuno. La masterizzazione dei CD resterà solo su Windows.
 
@@ -64,7 +64,7 @@
 
 ## A cosa serve
 
-MediaFlow mette in una finestra sola i lavori che di solito chiedono sei programmi
+Pica mette in una finestra sola i lavori che di solito chiedono sei programmi
 diversi e una riga di comando. Ogni sezione fa un mestiere, dall'inizio alla fine.
 
 | Sezione | Cosa fa |
@@ -77,10 +77,10 @@ diversi e una riga di comando. Ogni sezione fa un mestiere, dall'inizio alla fin
 | 🗣 **Doppiaggio AI** | Riscrivi una battuta e la fa dire a chi parla, con la sua voce, in una copia nuova del video. |
 | ✂ **Montaggio** | Taglia uno spezzone, unisce più file, ricava GIF e WebP animati. Scegli contenitore, codec e risoluzione, oppure copia senza ricodificare. |
 
-## Perché MediaFlow
+## Perché Pica
 
 - **Resta tutto sul tuo computer.** Nessun account, nessun caricamento su server di altri, nessuna telemetria. I modelli per trascrivere e tradurre girano in locale.
-- **Non mostra il tuo indirizzo a YouTube.** Ogni richiesta passa da Tor. Se Tor non parte, MediaFlow non scarica: meglio un download fallito che uno a viso scoperto.
+- **Non mostra il tuo indirizzo a YouTube.** Ogni richiesta passa da Tor. Se Tor non parte, Pica non scarica: meglio un download fallito che uno a viso scoperto.
 - **Dice le cose come stanno.** La stessa riga che ti offre il 4K ti dice, quando è il caso, che da quel video non aggiunge un solo dettaglio vero. Scegliere 320 kbps su una sorgente da 128 ingrandisce il file e basta, e c'è scritto.
 - **Non spreca qualità.** Dove può, copia invece di ricodificare: l'audio che YouTube serve già in AAC non viene compresso una seconda volta, e uno spezzone tagliato in copia esce in un istante e identico all'originale.
 - **Un lavoro si segue.** Ogni sezione ha la sua barra, che dice un numero vero. Se qualcosa va storto si apre una finestra con la causa in italiano e il testo tecnico sotto.
@@ -91,21 +91,21 @@ diversi e una riga di comando. Ogni sezione fa un mestiere, dall'inizio alla fin
 Serve [Python 3.12](https://www.python.org/downloads/) o successivo e [Git](https://git-scm.com/).
 
 ```sh
-git clone https://github.com/Imkun-on/MediaFlow
-cd MediaFlow
+git clone https://github.com/Imkun-on/Pica
+cd Pica
 pip install -r requirements.txt    # le dipendenze, una volta sola
 python main.py                     # apre la finestra
 ```
 
 Al primo avvio la finestra ci mette qualche minuto in più: sta scaricando FFmpeg e Tor
-in `%LOCALAPPDATA%\MediaDex`. I modelli per i sottotitoli e per l'AI arrivano la prima
+in `%LOCALAPPDATA%\Pica`. I modelli per i sottotitoli e per l'AI arrivano la prima
 volta che apri quelle sezioni, e possono pesare qualche centinaio di megabyte.
 
 Per costruire l'installatore di Windows serve anche [Inno Setup](https://jrsoftware.org/isinfo.php):
 
 ```sh
 winget install JRSoftware.InnoSetup
-.\costruisci.ps1                   # produce installer\output\MediaFlow-Setup.exe
+.\costruisci.ps1                   # produce installer\output\Pica-Setup.exe
 ```
 
 L'icona e il marchio escono da un solo script. Se cambi `assets/icona-originale.png`:
@@ -135,17 +135,17 @@ senza server e senza porte aperte verso l'esterno.
 
 | Sistema | File | Note |
 |---|---|---|
-| **Windows** 10 e 11 | [`MediaFlow-Setup.exe`](https://github.com/Imkun-on/MediaFlow/releases/latest/download/MediaFlow-Setup.exe) | L'installatore. Non servono Python né permessi di amministratore. |
-| **Windows** 10 e 11 | [`MediaFlow-Windows-portable.zip`](https://github.com/Imkun-on/MediaFlow/releases/latest/download/MediaFlow-Windows-portable.zip) | Senza installare: scompatta e lancia `MediaDex.exe`. Dalla prossima versione. |
+| **Windows** 10 e 11 | [`Pica-Setup.exe`](https://github.com/Imkun-on/Pica/releases/latest/download/Pica-Setup.exe) | L'installatore. Non servono Python né permessi di amministratore. |
+| **Windows** 10 e 11 | [`Pica-Windows-portable.zip`](https://github.com/Imkun-on/Pica/releases/latest/download/Pica-Windows-portable.zip) | Senza installare: scompatta e lancia `Pica.exe`. Dalla prossima versione. |
 | **macOS** | in arrivo | `.dmg` |
 | **Linux** | in arrivo | `.AppImage` |
 
 Le impronte SHA256 di ogni file sono in `SHA256SUMS.txt`, nella stessa
-[release](https://github.com/Imkun-on/MediaFlow/releases).
+[release](https://github.com/Imkun-on/Pica/releases).
 
 ### Se Windows chiede se il file è sicuro
 
-MediaFlow non è firmato: una firma costa qualche centinaio di euro l'anno. Per
+Pica non è firmato: una firma costa qualche centinaio di euro l'anno. Per
 questo Windows non lo riconosce e avvisa che il file «non viene scaricato di
 frequente». Non vuol dire che sia pericoloso: vuol dire che lo hanno scaricato in pochi.
 
@@ -158,12 +158,12 @@ frequente». Non vuol dire che sia pericoloso: vuol dire che lo hanno scaricato 
 Se preferisci controllare prima, confronta l'impronta del file con quella pubblicata:
 
 ```powershell
-Get-FileHash .\MediaFlow-Setup.exe -Algorithm SHA256
+Get-FileHash .\Pica-Setup.exe -Algorithm SHA256
 ```
 
 ## Licenza e crediti
 
-MediaFlow è rilasciato sotto **[PolyForm Noncommercial License 1.0.0](LICENSE)**: puoi
+Pica è rilasciato sotto **[PolyForm Noncommercial License 1.0.0](LICENSE)**: puoi
 usarlo, studiarlo e modificarlo per scopi non commerciali.
 
 È pensato per uso **personale**: usalo solo con contenuti di cui hai il diritto di

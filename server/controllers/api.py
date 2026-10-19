@@ -169,7 +169,7 @@ class Diario(io.TextIOBase):
     _ANSI = re.compile(r'\x1b\[[0-9;]*[A-Za-z]')
 
     def __init__(self, dove: str):
-        self._log = logging.getLogger(_LOG_DI.get(dove, 'mediadex'))
+        self._log = logging.getLogger(_LOG_DI.get(dove, 'pica'))
         self._resto = ''
         self._lucchetto = threading.Lock()
 
@@ -975,7 +975,7 @@ class Api:
             # per tagliare al fotogramma giusto.
             import tempfile as _tempfile
             tagliato = os.path.join(_tempfile.gettempdir(),
-                                    f'mediadex_prova_{os.getpid()}.mp4')
+                                    f'pica_prova_{os.getpid()}.mp4')
             subprocess.run(
                 ['ffmpeg', '-v', 'error', '-nostdin', '-y',
                  '-ss', f"{info['duration'] / 3:.3f}", '-i', percorso, '-t', str(prova),
@@ -1106,7 +1106,7 @@ class Api:
         import tempfile
         impronta = hashlib.sha1(
             f'{percorso}|{os.path.getmtime(percorso)}'.encode('utf-8')).hexdigest()[:16]
-        return os.path.join(tempfile.gettempdir(), 'mediaflow_timeline', impronta)
+        return os.path.join(tempfile.gettempdir(), 'pica_timeline', impronta)
 
     def clip_apri(self, percorso: str) -> dict:
         """Quello che serve alla pagina per mostrare un video da montare: il
@@ -1490,7 +1490,7 @@ class Api:
             return {'titolo': i18n.t('err.title'), 'causa': str(exc), 'dettaglio': ''}
 
         tecnico = traceback.format_exc()
-        logging.getLogger(_LOG_DI.get(bridge.qui(), 'mediadex')).error(tecnico)
+        logging.getLogger(_LOG_DI.get(bridge.qui(), 'pica')).error(tecnico)
         return {
             'titolo': i18n.t('err.title'),
             # Si classifica sul traceback intero e non sul solo str(exc):

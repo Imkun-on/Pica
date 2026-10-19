@@ -17,7 +17,7 @@ Cosa fa
 
 Da dove viene tor.exe
     Dal «Tor Expert Bundle» ufficiale, scaricato da torproject.org la prima
-    volta (circa 22 MB), in ``%LOCALAPPDATA%\\MediaDex\\tor``. La versione
+    volta (circa 22 MB), in ``%LOCALAPPDATA%\\Pica\\tor``. La versione
     la dice l'indice che usa anche Tor Browser per aggiornarsi.
 
 YouTube e Tor
@@ -45,8 +45,7 @@ from server.utils.console import setup_logger
 
 log = setup_logger('tor', 'tor.log')
 
-CARTELLA = os.path.join(os.environ.get('LOCALAPPDATA') or paths.dati(),
-                        'MediaDex', 'tor')
+CARTELLA = paths.locale('tor')
 ESEGUIBILE = os.path.join(CARTELLA, 'tor', 'tor.exe')
 DATI = os.path.join(CARTELLA, 'dati')
 _INDICE = ('https://aus1.torproject.org/torbrowser/update_3/release/'

@@ -10,7 +10,7 @@ sbaglia (pelle di plastica, lettere storte).
 Si usa la versione ncnn-vulkan: un .exe da 45 MB, senza Python ne' CUDA,
 che lavora sulla scheda grafica attraverso Vulkan - anche sulla Vega 8
 integrata di un Ryzen 5 3500U. Si scarica la prima volta che serve, in
-``%LOCALAPPDATA%\\MediaDex\\realesrgan``.
+``%LOCALAPPDATA%\\Pica\\realesrgan``.
 
 E' lento, ed e' la sua natura: su quel portatile il modello per video
 (``realesr-animevideov3``, x2) impiega circa 2,5 secondi per fotogramma a
@@ -43,8 +43,7 @@ from server.utils.console import setup_logger
 
 log = setup_logger('pixdex', 'pixdex.log')
 
-CARTELLA = os.path.join(os.environ.get('LOCALAPPDATA') or paths.dati(),
-                        'MediaDex', 'realesrgan')
+CARTELLA = paths.locale('realesrgan')
 ESEGUIBILE = os.path.join(CARTELLA, 'realesrgan-ncnn-vulkan.exe')
 _ARCHIVIO = ('https://github.com/xinntao/Real-ESRGAN/releases/download/'
              'v0.2.5.0/realesrgan-ncnn-vulkan-20220424-windows.zip')
@@ -122,7 +121,7 @@ def migliora(info: dict, dst: str, preset: str, altezza: int, crf: int,
     fps = info['fps'] or 25.0
     altezza = altezza or info['height']
 
-    with tempfile.TemporaryDirectory(prefix='mediadex_ai_') as tmp:
+    with tempfile.TemporaryDirectory(prefix='pica_ai_') as tmp:
         tutti = os.path.join(tmp, 'tutti')
         os.makedirs(tutti)
         if dici:
@@ -211,5 +210,5 @@ def migliora(info: dict, dst: str, preset: str, altezza: int, crf: int,
 
 def pulisci_residui() -> None:
     """Toglie le cartelle temporanee rimaste da un lavoro interrotto."""
-    for d in glob.glob(os.path.join(tempfile.gettempdir(), 'mediadex_ai_*')):
+    for d in glob.glob(os.path.join(tempfile.gettempdir(), 'pica_ai_*')):
         shutil.rmtree(d, ignore_errors=True)

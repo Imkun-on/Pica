@@ -1831,7 +1831,7 @@ def riscrivi(video: str, impressa: bool = True) -> dict:
             scrivi_srt(_ritradotti(lista, colori, lingua, codice), percorso, colori)
 
     larghezza, altezza = _dimensioni(video)
-    with tempfile.TemporaryDirectory(prefix='mediadex_sub_') as tmp:
+    with tempfile.TemporaryDirectory(prefix='pica_sub_') as tmp:
         tracce = []
         for n, (codice, percorso) in enumerate(srt_del_video(video)):
             lista_n, colori_n = leggi_srt(percorso)
@@ -1901,7 +1901,7 @@ def imprimi(video: str, ass: str) -> str:
     cartella, nome = os.path.split(video)
     uscita = os.path.join(paths.SOTTOTITOLATI, os.path.basename(nome_impresso(video)))
     os.makedirs(os.path.join(cartella, paths.SOTTOTITOLATI), exist_ok=True)
-    appoggio = 'mediadex-sottotitoli.ass'
+    appoggio = 'pica-sottotitoli.ass'
     shutil.copyfile(ass, os.path.join(cartella, appoggio))
     _, altezza = _dimensioni(video)
     filtri = f'subtitles={appoggio}'
@@ -1992,7 +1992,7 @@ def sottotitola(video: str, lingua: str | None = None,
 
     fase('scrittura')
     larghezza, altezza = _dimensioni(video)
-    with tempfile.TemporaryDirectory(prefix='mediadex_sub_') as tmp:
+    with tempfile.TemporaryDirectory(prefix='pica_sub_') as tmp:
         ass = os.path.join(tmp, 'sottotitoli.ass')
         scrivi_ass(lista, ass, colori, larghezza, altezza)
         scrivi_srt(lista, nome_srt(video), colori)

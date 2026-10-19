@@ -34,7 +34,7 @@ LRCLIB_API = 'https://lrclib.net/api'
 # versione scorre sfasato, ed e' peggio che non averlo.
 SCARTO_DURATA = 10
 
-HEADERS = {'User-Agent': 'MediaDex/1.0 (https://github.com/Imkun-on/AudioDex)'}
+HEADERS = {'User-Agent': 'Pica/1.0 (https://github.com/Imkun-on/Pica)'}
 
 _DECORAZIONI = ('official|video|lyric|audio|visualizer|hd|4k|remaster|m/?v'
                 '|testo|videoclip')

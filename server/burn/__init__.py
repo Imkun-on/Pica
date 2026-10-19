@@ -2,7 +2,7 @@
 
 Un CD audio non e' una cartella di file: e' un flusso PCM a 44.1 kHz e 16 bit,
 con una capienza misurata in minuti e non in megabyte, e con un vincolo che
-nessun altro mestiere di MediaDex ha - un disco scritto male e' consumato
+nessun altro mestiere di Pica ha - un disco scritto male e' consumato
 comunque. Per questo qui dentro c'e' tanta aritmetica e tanta diagnosi, e per
 questo la conferma prima di incidere mostra tutto quello che mostra.
 

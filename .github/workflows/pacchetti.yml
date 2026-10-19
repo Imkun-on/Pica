@@ -1,4 +1,4 @@
-# Costruisce MediaFlow-Setup.exe e, sui tag, lo pubblica come Release.
+# Costruisce Pica-Setup.exe e, sui tag, lo pubblica come Release.
 #
 #   git tag v1.2.0 && git push --tags     -> costruisce e pubblica
 #   «Run workflow» da GitHub               -> costruisce e basta, per provare
@@ -99,8 +99,7 @@ jobs:
           # non firmato il browser lo ferma gia' al download («non viene
           # scaricato di frequente»), mentre uno zip di norma passa.
           $uscita = 'installer/output'
-          Rename-Item 'dist/MediaDex' 'MediaFlow'
-          Compress-Archive -Path 'dist/MediaFlow' -DestinationPath "$uscita/MediaFlow-Windows-portable.zip" -CompressionLevel Optimal
+          Compress-Archive -Path 'dist/Pica' -DestinationPath "$uscita/Pica-Windows-portable.zip" -CompressionLevel Optimal
 
           # Le impronte di tutto cio' che si pubblica, in un file solo e nel
           # formato che `sha256sum -c` sa rileggere.
@@ -111,10 +110,10 @@ jobs:
 
       - uses: actions/upload-artifact@v4
         with:
-          name: MediaFlow-${{ steps.versione.outputs.valore }}
+          name: Pica-${{ steps.versione.outputs.valore }}
           path: |
-            installer/output/MediaFlow-Setup.exe
-            installer/output/MediaFlow-Windows-portable.zip
+            installer/output/Pica-Setup.exe
+            installer/output/Pica-Windows-portable.zip
             installer/output/SHA256SUMS.txt
           retention-days: 30
           # E' gia' compresso con lzma2: ricomprimerlo non toglie un byte e
@@ -128,8 +127,8 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: |
           $v = '${{ steps.versione.outputs.valore }}'
-          $file = 'installer/output/MediaFlow-Setup.exe'
-          $tutti = @($file, 'installer/output/MediaFlow-Windows-portable.zip',
+          $file = 'installer/output/Pica-Setup.exe'
+          $tutti = @($file, 'installer/output/Pica-Windows-portable.zip',
                      'installer/output/SHA256SUMS.txt')
           $mb = [math]::Round((Get-Item $file).Length / 1MB, 1)
           $sha = (Get-FileHash $file -Algorithm SHA256).Hash
@@ -139,14 +138,14 @@ jobs:
           # '@ dovrebbe stare in colonna zero, e l'indentazione del file lo
           # rende impossibile.
           $righe = @(
-            "## MediaFlow $v",
+            "## Pica $v",
             "",
-            "Scarica **MediaFlow-Setup.exe** qui sotto e fai doppio clic.",
+            "Scarica **Pica-Setup.exe** qui sotto e fai doppio clic.",
             "Non serve Python, non servono permessi di amministratore.",
             "",
             "Se il browser ferma il download dell'installatore, c'e' anche",
-            "**MediaFlow-Windows-portable.zip**: si scompatta dove si vuole e si",
-            "lancia ``MediaDex.exe``, senza installare niente.",
+            "**Pica-Windows-portable.zip**: si scompatta dove si vuole e si",
+            "lancia ``Pica.exe``, senza installare niente.",
             "",
             "| | |",
             "|---|---|",
@@ -163,7 +162,7 @@ jobs:
             "cosi':",
             "",
             '```powershell',
-            'Get-FileHash .\MediaFlow-Setup.exe -Algorithm SHA256',
+            'Get-FileHash .\Pica-Setup.exe -Algorithm SHA256',
             '```'
           )
           $righe | Set-Content -Path note.md -Encoding utf8
@@ -172,5 +171,5 @@ jobs:
           if ($LASTEXITCODE -eq 0) {
               gh release upload "v$v" @tutti --clobber
           } else {
-              gh release create "v$v" @tutti --title "MediaFlow $v" --notes-file note.md
+              gh release create "v$v" @tutti --title "Pica $v" --notes-file note.md
           }

@@ -1,9 +1,9 @@
-"""Il lavoratore della voce: gira nell'ambiente separato, non in MediaDex.
+"""Il lavoratore della voce: gira nell'ambiente separato, non in Pica.
 
-Chatterbox (e PyTorch sotto) vuole versioni di librerie che MediaDex usa gia'
+Chatterbox (e PyTorch sotto) vuole versioni di librerie che Pica usa gia'
 in altre versioni, e pesa un giga: sta in un ambiente Python suo (vedi
 ``doppiaggio.ambiente``), e questo file e' l'unica cosa che ci gira dentro.
-Non importa niente di MediaDex: riceve un lavoro in JSON, genera le frasi, e
+Non importa niente di Pica: riceve un lavoro in JSON, genera le frasi, e
 racconta a che punto e' su stdout, una riga JSON per evento.
 
     {"riferimenti": {"<persona>": "voce.wav"}, "lingua": "it",

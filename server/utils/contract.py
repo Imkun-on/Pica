@@ -14,7 +14,7 @@ Il problema che risolve
     ci vuole una riga in italiano.
 
 Cosa fa e cosa non fa
-    Riconosce le famiglie di guasti che MediaDex produce davvero - non tutte
+    Riconosce le famiglie di guasti che Pica produce davvero - non tutte
     quelle possibili - e per ognuna restituisce una frase. Il testo tecnico
     non lo butta via: continua a viaggiare accanto, nel suo riquadro, perche'
     e' quello che si copia per cercarlo in rete.

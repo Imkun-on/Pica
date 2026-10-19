@@ -1,4 +1,4 @@
-"""MediaDex — quattro strumenti, una finestra sola.
+"""Pica — quattro strumenti, una finestra sola.
 
 Cosa fa questo file
     Apre la finestra, e nient'altro. Il lavoro sta tutto in ``server/``, che
@@ -60,7 +60,7 @@ import webview
 
 def main() -> None:
     finestra = webview.create_window(
-        'MediaFlow',
+        'Pica',
         _risorsa('client', 'index.html'),
         js_api=Api(),
         # Massimizzata, non a schermo intero, e la differenza si vede subito.
@@ -100,7 +100,7 @@ def main() -> None:
     # L'icona della finestra. Su Windows pywebview, se non gliela si passa, la
     # estrae dall'eseguibile: lanciando i sorgenti finirebbe quella di
     # python.exe, quindi gliela si indica sempre.
-    icona = _risorsa('assets', 'MediaDex.ico')
+    icona = _risorsa('assets', 'Pica.ico')
     webview.start(icon=icona if os.path.isfile(icona) else None)
 
 

@@ -1,7 +1,7 @@
-; Installatore di MediaDex.
+; Installatore di Pica.
 ;
 ; Non si compila a mano: lo chiama costruisci.ps1, che prima costruisce
-; dist\MediaDex\ con PyInstaller e poi passa di qui con la versione giusta.
+; dist\Pica\ con PyInstaller e poi passa di qui con la versione giusta.
 ;
 ;     .\costruisci.ps1 -Versione 2.0
 ;
@@ -9,18 +9,20 @@
 ;   1. controlla se WebView2 c'e' gia'; se no lo scarica (e se il download
 ;      fallisce va avanti lo stesso: vedi [Code]);
 ;   2. spazza il vecchio _internal, per non mescolare librerie di due versioni;
-;   3. copia dist\MediaDex\ in %LOCALAPPDATA%\Programs\MediaDex;
+;   3. copia dist\Pica\ in %LOCALAPPDATA%\Programs\Pica;
 ;   4. crea le scorciatoie, installa WebView2 se serviva, e offre di aprire;
 ;   5. alla disinstallazione chiede prima di cancellare i file prodotti.
 
-; NomeApp resta MediaDex per la cartella e l'indirizzo dell'installatore:
-; cambiarlo romperebbe gli aggiornamenti. Quello che si vede e' NomeVisibile.
-#define NomeApp        "MediaDex"
-#define NomeVisibile   "MediaFlow"
+; Fino alla 2.0 il programma si chiamava MediaDex (cartella, eseguibile) e
+; MediaFlow (quello che si vedeva). L'AppId qui sotto e' rimasto lo stesso,
+; quindi chi aggiorna resta nella cartella che aveva - Inno la ricorda - e
+; [InstallDelete] toglie l'eseguibile e le scorciatoie col nome vecchio.
+#define NomeApp        "Pica"
+#define NomeVisibile   "Pica"
 #define Autore         "Imkun-on"
-#define SitoApp        "https://github.com/Imkun-on/MediaFlow"
-#define EseguibileApp  "MediaDex.exe"
-#define Sorgente       "..\dist\MediaDex"
+#define SitoApp        "https://github.com/Imkun-on/Pica"
+#define EseguibileApp  "Pica.exe"
+#define Sorgente       "..\dist\Pica"
 
 ; La versione arriva da costruisci.ps1 come /DVersione=1.2.0. Il ripiego serve
 ; solo a chi compila questo file a mano per prova.
@@ -29,7 +31,7 @@
 #endif
 
 [Setup]
-; Questo GUID identifica MediaDex per sempre, ed e' quello che permette a una
+; Questo GUID identifica Pica per sempre, ed e' quello che permette a una
 ; versione nuova di riconoscere e sostituire quella vecchia invece di
 ; installarsi accanto. Non va MAI cambiato, e non va MAI copiato da un altro
 ; programma: due installatori con lo stesso AppId si disinstallano a vicenda.
@@ -46,7 +48,7 @@ VersionInfoVersion={#Versione}
 ; Installazione per utente, senza UAC.
 ;
 ; Non e' una scorciatoia per evitare la finestra dei permessi: e' l'unica
-; collocazione in cui MediaDex funziona. Il programma scrive ACCANTO A SE
+; collocazione in cui Pica funziona. Il programma scrive ACCANTO A SE
 ; STESSO - risultati\, logs\, Database_Globale\ - e dentro
 ; "Programmi" un utente normale non ha permesso di scrivere. Installato li',
 ; il primo download fallirebbe con un errore di permessi che nessuno saprebbe
@@ -57,17 +59,20 @@ VersionInfoVersion={#Versione}
 PrivilegesRequired=lowest
 DefaultDirName={autopf}\{#NomeApp}
 DefaultGroupName={#NomeVisibile}
+; Il gruppo del menu Start si chiamava MediaFlow: senza questa riga Inno
+; riuserebbe quello, e le scorciatoie nuove finirebbero sotto il nome vecchio.
+UsePreviousGroup=no
 DisableProgramGroupPage=yes
 DisableDirPage=auto
 
 OutputDir=output
 ; Senza il numero di versione nel nome, di proposito: cosi' l'indirizzo
-; https://github.com/Imkun-on/MediaFlow/releases/latest/download/MediaFlow-Setup.exe
+; https://github.com/Imkun-on/Pica/releases/latest/download/Pica-Setup.exe
 ; resta valido per sempre e si puo' mettere nel README senza doverlo
 ; aggiornare a ogni pubblicazione.
 OutputBaseFilename={#NomeVisibile}-Setup
 
-SetupIconFile=..\assets\MediaDex.ico
+SetupIconFile=..\assets\Pica.ico
 LicenseFile=..\LICENSE
 Compression=lzma2/max
 SolidCompression=yes
@@ -120,13 +125,19 @@ Name: "desktopicon"; Description: "{cm:CreaIconaDesktop}"; \
 ;
 ; PyInstaller mette li' dentro le librerie con nomi che cambiano da una
 ; versione all'altra di Python e dei pacchetti. Senza questa riga, aggiornando
-; MediaDex le librerie vecchie resterebbero accanto alle nuove e Python ne
+; Pica le librerie vecchie resterebbero accanto alle nuove e Python ne
 ; caricherebbe un misto: guasti che non somigliano a niente e che spariscono
 ; disinstallando e reinstallando.
 ;
 ; Non tocca niente dei dati di chi usa il programma: quelli stanno in {app},
 ; non in {app}\_internal.
 Type: filesandordirs; Name: "{app}\_internal"
+
+; Quello che resta del nome vecchio (vedi in cima): l'eseguibile, il gruppo
+; nel menu Start e la scorciatoia sul desktop. I dati non c'entrano.
+Type: files; Name: "{app}\MediaDex.exe"
+Type: filesandordirs; Name: "{autoprograms}\MediaFlow"
+Type: files; Name: "{autodesktop}\MediaFlow.lnk"
 
 [Dirs]
 ; Creata vuota cosi' la scorciatoia "Apri la cartella dei risultati" e il
@@ -150,13 +161,13 @@ Source: "{#Sorgente}\*"; DestDir: "{app}"; \
 ; dell'eseguibile: cosi' restano nitide anche alle misure grandi, dove Windows
 ; altrimenti stira la piu' piccola delle icone incorporate.
 Name: "{group}\{#NomeVisibile}"; Filename: "{app}\{#EseguibileApp}"; \
-    IconFilename: "{app}\_internal\assets\MediaDex.ico"
+    IconFilename: "{app}\_internal\assets\Pica.ico"
 Name: "{group}\{cm:ApriRisultati}"; Filename: "{app}\risultati"
 Name: "{autodesktop}\{#NomeVisibile}"; Filename: "{app}\{#EseguibileApp}"; \
-    IconFilename: "{app}\_internal\assets\MediaDex.ico"; Tasks: desktopicon
+    IconFilename: "{app}\_internal\assets\Pica.ico"; Tasks: desktopicon
 
 [Run]
-; WebView2 per primo: se manca, MediaDex si apre su una finestra bianca.
+; WebView2 per primo: se manca, Pica si apre su una finestra bianca.
 Filename: "{tmp}\MicrosoftEdgeWebview2Setup.exe"; Parameters: "/silent /install"; \
     StatusMsg: "{cm:WebView2Installo}"; Flags: waituntilterminated; Check: ServeWebView2
 Filename: "{app}\{#EseguibileApp}"; Description: "{cm:AvviaOra}"; \
@@ -246,7 +257,7 @@ end;
 
 { Alla disinstallazione si chiede prima di cancellare i dati.
 
-  I brani scaricati sono l'unica cosa di MediaDex che non si puo' rifare
+  I brani scaricati sono l'unica cosa di Pica che non si puo' rifare
   premendo un bottone: possono essere ore di download. Cancellarli senza
   chiedere, dentro una disinstallazione che qualcuno sta facendo magari solo
   per reinstallare, sarebbe il danno peggiore che questo programma possa

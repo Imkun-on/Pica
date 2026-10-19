@@ -22,7 +22,7 @@ TESTI: dict[str, str] = {
                    'Il testo qui sotto è quello che ha risposto.',
 
     'err.ffmpeg':  'Manca FFmpeg. È lo strumento che converte, taglia e ricodifica: '
-                   'senza, quasi niente di quello che fa MediaFlow può funzionare. '
+                   'senza, quasi niente di quello che fa Pica può funzionare. '
                    'Di solito si scarica da solo al primo avvio: controlla la '
                    'connessione e riapri il programma. In alternativa si installa '
                    'con «winget install Gyan.FFmpeg».',

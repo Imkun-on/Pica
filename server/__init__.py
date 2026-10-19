@@ -1,4 +1,4 @@
-"""Il motore di MediaDex: tutto quello che sa fare, e niente di come si mostra.
+"""Il motore di Pica: tutto quello che sa fare, e niente di come si mostra.
 
 Le cartelle, dal basso verso l'alto
     config/       le manopole, i testi, i percorsi. Non fa niente: risponde.
